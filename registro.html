@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>Registro</title>
+		<script>
+		function vervalores(){ 
+		var sAux="";
+		var frm = document.getElementById("registro");
+		for (i=1;i<frm.elements.length;i++)
+		{ sAux += "NOMBRE: " + frm.elements[i].name + " ";
+		  sAux += "VALOR: " + frm.elements[i].value + "\n" ;
+		} 
+		alert(sAux);
+		} 
+		</script>
+	</head>
+	<body>
+	<h1>Registro</h1>
+		<form form id='registro' name='registro' onSubmit='vervalores()'>
+			Nombre y apellidos*:<input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
+
+			Direccion de correo*:<input type="text" name="direcciondecorreo" id="direcciondecorreo"><br><br>
+
+			Password*:<input type="text" name="password" id="password" ><br><br>
+
+			Numero de telefono*:<input type="text" name="numerodetelefono" id="numerodetelefono"><br><br>
+			
+			Especialidad*:<br><input type="radio" name="especialidad" value="IS" checked>Ingenieria del Software<br>
+						  <input type="radio" name="especialidad" value="IC">Ingenieria de Computadores<br>
+						  <input type="radio" name="especialidad" value="C">Computacion<br>
+						  <input type="radio" name="especialidad" value="O">Otra<br><br>
+						  
+			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br>
+			<br><input type="submit" value="Submit"><br>
+
+		</form>
+		<a href="layout.html">Volver</a>
+	</body>
+</html>

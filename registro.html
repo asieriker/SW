@@ -15,22 +15,24 @@
 	</head>
 	<body>
 	<h1>Registro</h1>
-		<form form id='registro' name='registro' onSubmit='vervalores()'>
-			Nombre y apellidos*:<input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
+		<form form id='registro' name='registro' onSubmit='vervalores()' enctype="multipart/form-data" method="POST">
+			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
 
-			Direccion de correo*:<input type="text" name="direcciondecorreo" id="direcciondecorreo"><br><br>
+			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo"><br><br>
 
-			Password*:<input type="text" name="password" id="password" ><br><br>
+			Password*: <input type="text" name="password" id="password" ><br><br>
 
-			Numero de telefono*:<input type="text" name="numerodetelefono" id="numerodetelefono"><br><br>
+			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono"><br><br>
 			
-			Especialidad*:<br><input type="radio" name="especialidad" value="IS" checked>Ingenieria del Software<br>
+			Especialidad*: <br><input type="radio" name="especialidad" value="IS" checked>Ingenieria del Software<br>
 						  <input type="radio" name="especialidad" value="IC">Ingenieria de Computadores<br>
 						  <input type="radio" name="especialidad" value="C">Computacion<br>
 						  <input type="radio" name="especialidad" value="O">Otra<br><br>
 						  
-			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br>
+			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
+			Subir foto: <input name="uploadedfile" type="file" /><br> 
 			<br><input type="submit" value="Submit"><br>
+			
 
 		</form>
 		<a href="layout.html">Volver</a>

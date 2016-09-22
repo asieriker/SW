@@ -2,21 +2,65 @@
 <html>
 	<head>
 		<title>Registro</title>
-		<script>
+		<script language="JavaScript">
 		function vervalores(){ 
 			var sAux="";
 			var frm = document.getElementById("registro");
 			for (i=1;i<frm.elements.length;i++)
-				{ sAux += "NOMBRE: " + frm.elements[i].name + " ";
+			{ 
+				sAux += "NOMBRE: " + frm.elements[i].name + " ";
 				sAux += "VALOR: " + frm.elements[i].value + "\n" ;
 			} 
 			alert(sAux);
 		} 
+		
+		function verificar(){ 
+			valor = document.getElementById("nombreyapellidos").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce Nombre y apellidos");
+				return false;
+			}
+			
+			valor = document.getElementById("direcciondecorreo").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce un correo");
+				return false;
+			}
+			
+			valor = document.getElementById("password").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce un password");
+				return false;
+			}
+			
+			valor = document.getElementById("numerodetelefono").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce un telefono");
+				return false;
+			}
+			return verificarEMail();
+
+		}
+		function verificarEMail(){
+			patron = document.getElementById("direcciondecorreo").value;
+			
+				[0-9][3]@ikasle.ehu.(es|eus)"
+
+			expr = /^([a-zA-Z_\.\-])+ \@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			
+			expr = /^([a-zA-Z_\.\-])+ [0-9][3]\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if ( !expr.test(patron) ){
+				alert("El checkeo de email fracasó ioeputa");
+				return false;
+			}
+			return true;
+		}
 		</script>
+
 	</head>
 	<body>
 	<h1>Registro</h1>
-		<form form id='registro' name='registro' onSubmit='vervalores()' enctype="multipart/form-data" method="POST" action="algo.php">
+		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="algo.php">
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
 
 			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo"><br><br>

@@ -44,13 +44,38 @@
 		function verificarEMail(){
 			patron = document.getElementById("direcciondecorreo").value;
 			
-				[0-9][3]@ikasle.ehu.(es|eus)"
-
-			expr = /^([a-zA-Z_\.\-])+ \@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			
-			expr = /^([a-zA-Z_\.\-])+ [0-9][3]\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			if ( !expr.test(patron) ){
-				alert("El checkeo de email fracasó ioeputa");
+			var re = new RegExp("^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$");
+			if ( !re.test(patron) ){
+				alert("El checkeo de email fracasó ioeputa malparido");
+				return false;
+			}
+			return verificarPhone();
+		}
+		function verificarPhone(){
+			patron = document.getElementById("numerodetelefono").value;
+			var re = new RegExp("^696550254$");
+			if(!re.test(patron)){
+				alert("El checkeo de selular fracasó ioeputa malparido");
+				return false;
+			}
+			return verificarPassword();
+		}
+		function verificarPassword(){
+			patron = document.getElementById("password").value;
+			var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+			var re = new RegExp(regex);
+			if(!re.test(patron)){
+				alert("El checkeo de clave de acseso foranea fracasó ioeputa malparido \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minucula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial");
+				return false;
+			}
+			return verificarNombreApellidos();
+		}
+		function verificarNombreApellidos(){
+			patron = document.getElementById("nombreyapellidos").value;
+			var regex =
+			var re = new RegExp("[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*");
+			if (!re.test(patron)) {
+				alert("mamahuevo malparido");
 				return false;
 			}
 			return true;
@@ -76,7 +101,7 @@
 						  
 			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
 			Subir foto: <input name="uploadedfile" type="file" /><br> 
-			<br><input type="submit" value="Submit"><br>
+			<br><input type="submit" value="Submit"><br><br>
 			
 		</form>
 		<a href="layout.html">Volver</a>

@@ -1,0 +1,76 @@
+	
+	<!DOCTYPE html>
+<html>
+	<head>
+		<title>RegistroHTML5</title>
+		<style>
+          .thumb {
+            height: 300px;
+            border: 1px solid #000;
+            margin: 10px 5px 0 0;
+          }
+        </style>
+			<script language="JavaScript">
+			var otraSeleccionada=false;
+				function otraEspecialidad(frm){
+					if(!otraSeleccionada){
+					var otra=document.createElement('textarea');
+					frm.appendChild(otra);
+					otraSeleccionada=true;
+					}
+		 		}
+		 	
+			</script>
+		</head>
+	<body>
+	<h1>Registro</h1>
+		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="algo.php">
+
+			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos" pattern="[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*" required oninvalid="this.setCustomValidity('Introduce Nombre y dos apellidos')" oninput="setCustomValidity('')"/><br><br>
+
+			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/><br><br>
+
+			Password*: <input type="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" /><br><br>
+
+			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono" pattern="^[0-9]{9}$" required oninvalid="this.setCustomValidity('Introduce un numero de telefono valido; 9 digitos')" oninput="setCustomValidity('')"/><br><br>
+			
+			Especialidad*: <br><input type="radio" name="especialidad" value="IS" checked>Ingenieria del Software<br>
+						  <input type="radio" name="especialidad" value="IC">Ingenieria de Computadores<br>
+						  <input type="radio" name="especialidad" value="C">Computacion<br>
+						  <input type="radio" name="especialidad" value="O" onclick="JavaScript:otraEspecialidad(this.form)">Otra<br><br>
+						  
+			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
+		   			<input type="file" id="files" name="files[]" /><br />
+					<output id="list"></output>
+			<br><input type="submit" value="Enviar"><br><br>
+			
+		</form>
+        <script>
+              function archivo(evt) {
+                  var files = evt.target.files; // FileList object
+             
+                  // Obtenemos la imagen del campo "file".
+                  for (var i = 0, f; f = files[i]; i++) {
+                    //Solo admitimos imágenes.
+                    if (!f.type.match('image.*')) {
+                        continue;
+                    }
+             
+                    var reader = new FileReader();
+             
+                    reader.onload = (function(theFile) {
+                        return function(e) {
+                          // Insertamos la imagen
+                         document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                        };
+                    })(f);
+             
+                    reader.readAsDataURL(f);
+                  }
+              }
+             
+              document.getElementById('files').addEventListener('change', archivo, false);
+      </script>
+		<a href="layout.html">Volver</a>
+	</body>
+</html>

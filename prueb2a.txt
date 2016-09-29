@@ -1,6 +1,0 @@
-Para coger de github y seguir subiendo
-git clone
-git init
-git add . 
-git username etc
-git push

@@ -135,7 +135,7 @@
 			patron = document.getElementById("nombreyapellidos").value;
 			var re = new RegExp("[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*");
 			if (!re.test(patron)) {
-				alert("Introduce un nombre y dos apellidos (primera letra en mayúscula)");
+				alert("Introduce un nombre y dos apellidos (primera letra en mayÃºscula)");
 				return false;
 			}
 			return verificarEMail();
@@ -157,7 +157,7 @@
 			var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 			var re = new RegExp(regex);
 			if(!re.test(patron)){
-				alert("La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minucula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial");
+				alert("La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayÃºscula \n Al menos una letra minuscula \n Al menos un digito No espacios en blanco \n Al menos 1 caracter especial");
 				return false;
 			}
 			return verificarPhone();
@@ -167,7 +167,7 @@
 			patron = document.getElementById("numerodetelefono").value;
 			var re = new RegExp("^[0-9]{9}$");
 			if(!re.test(patron)){
-				alert("Introduce un numero de telefono valido; 9 dígitos");
+				alert("Introduce un numero de telefono valido; 9 dÃ­gitos");
 				return false;
 			}
 			return true;
@@ -178,7 +178,7 @@
 	</head>
 	<body>
 	<h1>Registro</h1>
-		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="algo.php">
+		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="registrar.php">
 
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
 
@@ -194,7 +194,7 @@
 						  <input type="radio" name="especialidad" value="O" onclick="JavaScript:otraEspecialidad(this.form)">Otra<br><br>
 						  
 			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
-   			<input type="file" id="foto1" onchange="return ShowImagePreview( this.files );" /><br><br>
+   			<input type="file" id="foto1" name="foto" onchange="return ShowImagePreview( this.files );" /><br><br>
 			<div id="previewcanvascontainer"><canvas id="previewcanvas"></canvas></div>
 			<br><input type="submit" value="Enviar"><br><br>
 			

@@ -178,7 +178,7 @@
 	</head>
 	<body>
 	<h1>Registro</h1>
-		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="registrar.php">
+		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="registrarConFoto.php">
 
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos"><br><br>
 
@@ -194,7 +194,7 @@
 						  <input type="radio" name="especialidad" value="O" onclick="JavaScript:otraEspecialidad(this.form)">Otra<br><br>
 						  
 			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
-   			<input type="file" id="foto1" name="foto" onchange="return ShowImagePreview( this.files );" /><br><br>
+   			<input type="file" id="foto" name="foto" onchange="return ShowImagePreview( this.files );" /><br><br>
 			<div id="previewcanvascontainer"><canvas id="previewcanvas"></canvas></div>
 			<br><input type="submit" value="Enviar"><br><br>
 			

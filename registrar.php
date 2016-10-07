@@ -7,8 +7,7 @@ if (!$mysqli)
 echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
 }
 
-
-$sql="INSERT INTO Usuario (NombreApellidos, Correo, Contrasena, NTelefono, Especialidad, Intereses) VALUES ('$_POST[nombreyapellidos]','$_POST[direcciondecorreo]','$_POST[password]',$_POST[numerodetelefono],'$_POST[especialidad]','$_POST[intereses]')";
+$sql="INSERT INTO Usuario (NombreApellidos, Correo, Contrasena, NTelefono, Especialidad, Intereses, Imagen) VALUES ('$_POST[nombreyapellidos]','$_POST[direcciondecorreo]','$_POST[password]',$_POST[numerodetelefono],'$_POST[especialidad]','$_POST[intereses]')";
 
 
 

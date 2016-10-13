@@ -23,7 +23,7 @@
     </header>
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.html'>Inicio</a></spam>
-		<span><a href='verPreguntas.html'>Preguntas</a></spam>
+		<span><a href='quizes'>Preguntas</a></spam>
 		<span><a href='creditos.html'>Creditos</a></spam>
 	</nav>
     <section class="main" id="s1">
@@ -39,3 +39,29 @@
 </div>
 </body>
 </html>
+
+
+<?php
+
+$link= mysqli_connect("localhost", "root","", "Quiz");
+
+$preguntas = mysqli_query($link, "select * from preguntas" );
+echo '<table border=1> <tr> 
+	<th> Numero </th> 
+	<th> Email </th> 
+	<th> Pregunta</th>
+	<th> Respuesta</th>
+	<th> Complejidad</th>
+</tr>';
+
+while ($row = mysqli_fetch_array( $preguntas )) {
+	echo '<tr><td>' . $row['Numero'] . '</td> <td>' . $row['Email'] . '</td>
+	 <td>' . $row['Pregunta'] . '</td> <td>' . $row['Respuesta'] .'</td> <td>' . $row['Complejidad'] . '</td></tr>';
+}
+
+echo '</table>';
+$preguntas->close(); //poner notacion no OO
+mysqli_close($link);
+
+?>
+

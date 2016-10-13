@@ -1,4 +1,3 @@
-
 <html>
 	<form id="login" action="Login.php"   method="post">           
 		<h2>Identificación de usuario </h2>                

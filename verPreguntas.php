@@ -29,23 +29,10 @@
     <section class="main" id="s1">
     
 	<div>
-	Aqui se visualizan las preguntas y los creditos ...
-	</div>
-    </section>
-	<footer class='main' id='f1'>
-		<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
-		<a href='https://github.com'>Link GITHUB</a>
-	</footer>
-</div>
-</body>
-</html>
-
-
-<?php
-
+	<?php
 $link= mysqli_connect("localhost", "root","", "Quiz");
 
-$preguntas = mysqli_query($link, "select * from preguntas" );
+$preguntas = mysqli_query($link, "select * from pregunta" );
 echo '<table border=1> <tr> 
 	<th> Numero </th> 
 	<th> Email </th> 
@@ -64,4 +51,16 @@ $preguntas->close(); //poner notacion no OO
 mysqli_close($link);
 
 ?>
+	</div>
+    </section>
+	<footer class='main' id='f1'>
+		<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
+		<a href='https://github.com'>Link GITHUB</a>
+	</footer>
+</div>
+</body>
+</html>
+
+
+
 

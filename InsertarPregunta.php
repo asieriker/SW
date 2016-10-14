@@ -24,7 +24,7 @@
 	if (!mysqli_query($link ,$sql)){
 		die('Error: ' . mysqli_error($link));
 	}
-		echo "1 record added";
+		echo '<script language="javascript">alert("1 record added");</script>';
 	mysqli_close($link); 
 	}
 ?>

@@ -23,7 +23,6 @@
     </header>
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.html'>Inicio</a></spam>
-		<span><a href='quizes'>Preguntas</a></spam>
 		<span><a href='creditos.html'>Creditos</a></spam>
 	</nav>
     <section class="main" id="s1">

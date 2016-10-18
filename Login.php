@@ -19,9 +19,15 @@
 	$pass=$_POST['pass']; 
 	$usuarios = mysqli_query($link,"select * from usuario where Correo='$email' and Contrasena='$pass'"); 
 	$cont= mysqli_num_rows($usuarios); 
-	mysqli_close($link); 
+	
 	if($cont==1){
-		header('Location: InsertarPregunta.php');
+		$sql="INSERT INTO conexiones (Correo, Hora) VALUES ('$email',CURTIME())";
+		if (!mysqli_query($link ,$sql))
+		{
+			die('Error: ' . mysqli_error($link));
+		}
+		mysqli_close($link); 
+		header("Location: InsertarPregunta.php?email=$email");
 	} 
 	else {echo '<script language="javascript">alert("Datos incorrectos");</script>'; }
 	}

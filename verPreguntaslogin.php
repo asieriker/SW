@@ -16,13 +16,13 @@
   <body>
   <div id='page-wrap'>
 	<header class='main' id='h1'>
-		<span class="right"><a href="registro.html">Registrarse</a></span>
-		<span class="right"><a href="Login.php">Login</a></span>
-      		<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
+		<span class="right"><?php echo $_GET['email']?></span>
+		<span class="right"><a href="layout.html">Desconectar</a></span>
+      	<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
 		<h2>Quiz: el juego de las preguntas</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href="layout.html">Inicio</a></spam>
+		<span><a href="layoutin.php?email=<?php echo $_GET['email'] ?>">Inicio</a></spam>
 		<span><a href='creditos.html'>Creditos</a></spam>
 	</nav>
     <section class="main" id="s1">
@@ -46,12 +46,16 @@ while ($row = mysqli_fetch_array( $preguntas )) {
 }
 
 echo '</table>';
-$ip=$_SERVER['REMOTE_ADDR'];
-$sql="INSERT INTO acciones (Tipo, Hora, IP) VALUES('VerPreguntas',CURTIME(), '$ip')";
-if (!mysqli_query($link ,$sql)){
-	die('Error: ' . mysqli_error($link));
-}
 $preguntas->close(); //poner notacion no OO
+$ip=$_SERVER['REMOTE_ADDR'];
+$email=$_GET['email'];
+$sql = mysqli_query($link, "SELECT MAX(Id)FROM conexiones WHERE Correo='$email'" );	
+$resultado=mysqli_fetch_row($sql);
+$Id=$resultado[0];
+$sql="INSERT INTO acciones (IdConexion, Correo, Tipo, Hora, IP)values('$Id','$email', 'VerPreguntas',CURTIME(), '$ip')";
+if (!mysqli_query($link ,$sql)){
+		die('Error: ' . mysqli_error($link));
+	}
 mysqli_close($link);
 
 ?>

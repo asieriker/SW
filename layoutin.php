@@ -16,13 +16,13 @@
   <body>
   <div id='page-wrap'>
 	<header class='main' id='h1'>
-		<span class="right"><a href="registro.html">Registrarse</a></span>
-      		<span class="right"><a href="Login.php">Login</a></span>
-      		<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
+		<span class="right"><?php echo $_GET['email']?></span>
+		<span class="right"><a href="layout.html">Desconectar</a></span>
+      	<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
 		<h2>Quiz: el juego de las preguntas</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href='verPreguntas.php'>Preguntas</a></spam>
+		<span><a href='verPreguntaslogin.php?email=<?php echo $_GET['email'] ?>'>Preguntas</a></spam>
 		<span><a href='creditos.html'>Creditos</a></spam>
 	</nav>
     <section class="main" id="s1">

@@ -52,7 +52,7 @@
 		echo '<script language="javascript">alert("Pregunta añadida al documento XML");</script>';
 		echo '<br>';
 		echo '<br>';
-		echo '<a href=VerPreguntasXML.php>Ver preguntas XML </a>';
+		echo '<a href=verPreguntasXML.php>Ver preguntas XML </a>';
 	}catch (Exception $e){
 		echo '<script language="javascript">alert("Error cargando XML");</script>';
 	}

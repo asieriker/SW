@@ -64,7 +64,3 @@ mysqli_close($link);
 </div>
 </body>
 </html>
-
-
-
-

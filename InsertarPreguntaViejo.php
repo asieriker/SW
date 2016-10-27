@@ -1,3 +1,16 @@
+<html>
+	<form id="login" action="InsertarPregunta.php?email=<?php echo $_GET['email'] ?>" method="get">     
+		<h2>Añadir pregunta </h2>                
+		<input type="hidden" name="email" value="<?php echo $_GET['email']?>"      
+		<p> Asignatura: <input type="text" required id="asig" name="asig" size="50" value="" />		
+		<p> Pregunta: <input type="text" required id="preg" name="preg" size="50" value="" />   
+		<p> Respuesta: <input type="text" required id="resp" name="resp" size="50" value="" />
+		<p> Complejidad (1,5): <input type="number" min="1" max="5" id="comp" name="comp" size="50" value="" />
+		<p> <input id="input" type="submit" name="Enviar" value="Enviar"/>
+	</form>
+	<a href="layoutin.php?email=<?php echo $_GET['email'] ?>">Pagina inicio </a>
+</html>
+
 <?php
 	if (isset($_GET['preg']) && isset($_GET['asig']) && isset($_GET['resp'])){
 		$link = mysqli_connect("localhost", "root", "", "Quiz");
@@ -43,5 +56,5 @@
 		}catch (Exception $e){
 			echo '<script language="javascript">alert("Error cargando XML");</script>';
 		}	
-	}
+	}else echo '<script language="javascript">alert("faltan datos");</script>';
 ?>

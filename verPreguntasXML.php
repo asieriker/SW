@@ -4,7 +4,7 @@
 	echo '<table border=1> 
 	<tr> 
 		<th> Enunciado </th> 
-		<th> Complejdiad </th> 
+		<th> Complejidad </th> 
 		<th> Tematica </th> 
 	</tr>';
 	foreach ($xml->assessmentItem as $assessmentItem){

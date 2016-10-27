@@ -27,7 +27,7 @@
 			die('Error: ' . mysqli_error($link));
 		}
 		mysqli_close($link); 
-		header("Location: InsertarPregunta.php?email=$email");
+		header("Location: GestionPreguntas.php?email=$email");
 	} 
 	else {echo '<script language="javascript">alert("Datos incorrectos");</script>'; }
 	}

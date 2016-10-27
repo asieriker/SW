@@ -1,6 +1,6 @@
 <?php
-	if (isset($_GET['preg']) && isset($_GET['asig']) && isset($_GET['resp'])){
-		$link = mysqli_connect("localhost", "root", "", "Quiz");
+	if (isset($_GET['preg']) && isset($_GET['asig']) && isset($_GET['resp']) && ($_GET['preg']!="")&& ($_GET['asig']!="")&& ($_GET['resp']!="")){
+		$link = mysqli_connect("localhost", "root", "", "quiz");
 		if (!$link){
 			echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
 		}
@@ -43,5 +43,7 @@
 		}catch (Exception $e){
 			echo '<script language="javascript">alert("Error cargando XML");</script>';
 		}	
+	}else{
+		echo '<FONT COLOR="red">Por favor rellena el formulario </FONT>';
 	}
 ?>

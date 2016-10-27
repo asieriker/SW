@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="VerPreguntas.xsl"?>
 <assessmentItems>
 	<assessmentItem complexity="2" subject="Web">
 		<itemBody>
-			<p>Tag HTML para añadir un formulario</p>
+			<p>Tag HTML para a&#xF1;adir un formulario</p>
 		</itemBody>
 		<correctResponse>
 			<value>
@@ -13,8 +13,8 @@
 	</assessmentItem>
 		<assessmentItem complexity="4" subject="Internet">
 		<itemBody>
-			<p>Este protocolo acabará funcionando
-			incluso entre dos latas unidas por un cordón</p>
+			<p>Este protocolo acabar&#xE1; funcionando
+			incluso entre dos latas unidas por un cord&#xF3;n</p>
 		</itemBody>
 		<correctResponse>
 			<value>
@@ -22,4 +22,4 @@
 			</value>
 		</correctResponse>
 	</assessmentItem>
-</assessmentItems>
+<assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="Web" complexity="2"><itemBody><p>Que significa PHP</p></itemBody><correctResponse><value>Vadillo</value></correctResponse></assessmentItem><assessmentItem subject="Web" complexity="2"><itemBody><p>Que significa PHP</p></itemBody><correctResponse><value>Vadillo</value></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p>Esto funciona?</p></itemBody><correctResponse><value>no</value></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p>Esto funciona?</p></itemBody><correctResponse><value>no</value></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p>Esto funciona?</p></itemBody><correctResponse><value>no</value></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p>hola??</p></itemBody><correctResponse><value>no</value></correctResponse></assessmentItem><assessmentItem subject="Web" complexity=""><itemBody><p>hola??</p></itemBody><correctResponse><value>no</value></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p/></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="" complexity=""><itemBody><p>p</p></itemBody><correctResponse><value/></correctResponse></assessmentItem><assessmentItem subject="Webo" complexity=""><itemBody><p>Quien es el profesor de SW</p></itemBody><correctResponse><value>avese</value></correctResponse></assessmentItem></assessmentItems>

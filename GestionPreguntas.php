@@ -15,17 +15,36 @@
 
 	<form>  
 		<input type = "button" value = "Mostrar" onclick = "pedirDatos()">  
-		<input type = "button" value = "insertado" onclick = "insertarDatos()">  
+		<input type = "button" value = "insertado" onclick = "verificar()">  
 	</form>  
-	<div id="resultado">  
+	<div id="resultado">  <p>Aparecera algo</p> </div>
 	<div id="insertado">  
-		<p>Aparecera un titulo de pelicula</p>  
+		<p>Apareceran las preguntas del documento XML</p>  
 	</div> 
 </body>
 </html>
 
 <script language="javascript">
-
+	function verificar(){ 
+			valor = document.getElementById("asig").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce Asignatura");
+				return false;
+			}
+			
+			valor = document.getElementById("preg").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce Pregunta");
+				return false;
+			}
+			
+			valor = document.getElementById("resp").value;
+			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
+				alert("Introduce Respuesta");
+				return false;
+			}
+			insertarDatos();
+	}
 	function pedirDatos()
 	{
 		xmlhttp = new XMLHttpRequest();

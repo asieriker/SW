@@ -28,6 +28,21 @@
 </body>
 </html>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+		<script>
+		setInterval(function numeroPreguntas(){
+		$.ajax({
+			url: 'numPreguntas.php?email='+ document.getElementById('email').value,
+			beforeSend:function(){
+				$('#numPreguntas').html('<div><img src="imagenes/libelula.gif"/></div>')},
+			success:function(datos){
+				$('#numPreguntas').fadeIn().html(datos);},
+			error:function(){
+				$('#numPreguntas').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
+				}		
+		})}, 5000);
+	</script>
+	
 <script language="javascript">
 	function verificar(){ 
 			document.getElementById("insertado").value="";
@@ -64,7 +79,7 @@
 		xmlhttp.open("GET","verPreguntasXML.php"); 
 		xmlhttp.send();
 	}
-
+/*
 setInterval(function pedirNumPreguntas()
 	{
 		xmlhttp = new XMLHttpRequest();
@@ -78,9 +93,9 @@ setInterval(function pedirNumPreguntas()
 		}
 		xmlhttp.open("GET","numPreguntas.php?email="+ document.getElementById('email').value); 
 		xmlhttp.send();
-	}, 3000);
+	}, 5000);
+	*/
 	
-
 	function insertarDatos(){
 		xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange=function(){

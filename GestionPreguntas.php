@@ -5,7 +5,7 @@
 </head>
 <body>
 
-	<div id="numPreguntas"></div><p>Aparecera el numero de preguntas</p>
+	<div id="numPreguntas"><p>Aparecera el numero de preguntas</p></div>
 
 	<form id="pregunta" >     
 		<h2>Añadir pregunta </h2>                
@@ -18,17 +18,19 @@
 
 	<form>  
 		<input type = "button" value = "Mostrar" onclick = "pedirDatos()">  
-		<input type = "button" value = "insertado" onclick = "verificar()">  
+		<input type = "button" value = "Insertar pregunta" onclick = "verificar()">  
 	</form>  
-	<div id="resultado">  <p>Aparecera algo</p> </div>
 	<div id="insertado">  
-		<p>Apareceran las preguntas del documento XML</p>  
+		<p></p>  
 	</div> 
+	<div id="resultado">  <p>Apareceran las preguntas del documento XML</p> </div>
+	
 </body>
 </html>
 
 <script language="javascript">
 	function verificar(){ 
+			document.getElementById("insertado").value="";
 			valor = document.getElementById("asig").value;
 			if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ){
 				alert("Introduce Asignatura");
@@ -63,8 +65,7 @@
 		xmlhttp.send();
 	}
 
-
-	function pedirNumPreguntas()
+setInterval(function pedirNumPreguntas()
 	{
 		xmlhttp = new XMLHttpRequest();
 
@@ -75,15 +76,17 @@
 				document.getElementById("numPreguntas").innerHTML = xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("GET","numPreguntas.php"); 
+		xmlhttp.open("GET","numPreguntas.php?email="+ document.getElementById('email').value); 
 		xmlhttp.send();
-	}
+	}, 3000);
+	
 
 	function insertarDatos(){
 		xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange=function(){
 			if(xmlhttp.readyState==4 && xmlhttp.status==200){
 				document.getElementById('insertado').innerHTML=xmlhttp.responseText;
+				alert(xmlhttp.responseText);
 			}
 		}
 		xmlhttp.open("GET","InsertarPregunta.php?email="+ document.getElementById('email').value+ "&asig=" + document.getElementById("asig").value + "&preg=" + document.getElementById("preg").value + "&resp=" + document.getElementById("resp").value + "&comp=" +document.getElementById("comp").value, true);

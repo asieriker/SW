@@ -22,7 +22,6 @@
 		if (!mysqli_query($link ,$sql)){
 			die('Error: ' . mysqli_error($link));
 		}
-		echo '<script language="javascript">alert("1 record added");</script>';
 		mysqli_close($link);
 		
 		try{
@@ -36,12 +35,10 @@
 			$correctResponse=$pregunta->addChild('correctResponse');
 			$correctResponse->addChild('value', $resp);
 			$Preguntas->asXML('preguntas.xml');
-			echo '<script language="javascript">alert("Pregunta añadida al documento XML");</script>';
-			echo '<br>';
-			echo '<br>';
-			echo '<a href=verPreguntasXML.php>Ver preguntas XML </a>';
+			echo "Pregunta añadida al documento XML. ";
+			echo "Pregunta insertada correctamente. ";
 		}catch (Exception $e){
-			echo '<script language="javascript">alert("Error cargando XML");</script>';
+			echo "Error cargando XML. ";
 		}	
 	}else{
 		echo '<FONT COLOR="red">Por favor rellena el formulario </FONT>';

@@ -4,6 +4,9 @@
 	<title>Gestionar Preguntas</title>
 </head>
 <body>
+
+	<div id="numPreguntas"></div><p>Aparecera el numero de preguntas</p>
+
 	<form id="pregunta" >     
 		<h2>Añadir pregunta </h2>                
 		<input type="hidden" name="email" id="email" value="<?php echo $_GET['email']?>" >     
@@ -60,6 +63,21 @@
 		xmlhttp.send();
 	}
 
+
+	function pedirNumPreguntas()
+	{
+		xmlhttp = new XMLHttpRequest();
+
+		xmlhttp.onreadystatechange = function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+				document.getElementById("numPreguntas").innerHTML = xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("GET","numPreguntas.php"); 
+		xmlhttp.send();
+	}
 
 	function insertarDatos(){
 		xmlhttp = new XMLHttpRequest();

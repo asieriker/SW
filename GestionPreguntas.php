@@ -79,7 +79,7 @@
 		xmlhttp.open("GET","verPreguntasXML.php"); 
 		xmlhttp.send();
 	}
-/*
+
 setInterval(function pedirNumPreguntas()
 	{
 		xmlhttp = new XMLHttpRequest();
@@ -94,7 +94,7 @@ setInterval(function pedirNumPreguntas()
 		xmlhttp.open("GET","numPreguntas.php?email="+ document.getElementById('email').value); 
 		xmlhttp.send();
 	}, 5000);
-	*/
+	
 	
 	function insertarDatos(){
 		xmlhttp = new XMLHttpRequest();

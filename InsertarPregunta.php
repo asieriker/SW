@@ -1,6 +1,6 @@
 <?php
 	if (isset($_GET['preg']) && isset($_GET['asig']) && isset($_GET['resp']) && ($_GET['preg']!="")&& ($_GET['asig']!="")&& ($_GET['resp']!="")){
-		$link = mysqli_connect("localhost", "root", "", "quiz");
+		$link = mysqli_connect("localhost", "root", "", "Quiz");
 		if (!$link){
 			echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
 		}

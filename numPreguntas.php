@@ -1,6 +1,6 @@
 <?php
 
-		$link = mysqli_connect("localhost", "root", "", "quiz");
+		$link = mysqli_connect("localhost", "root", "", "Quiz");
 		if (!$link){
 			echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
 		}

@@ -145,7 +145,7 @@
 		function contraseñaAJAX(){
 					alert(document.getElementById('password').value);
 				$.ajax({
-					url: 'clienteComprobarContraseñaWSDL.php?contraseña='+ document.getElementById('password').value,
+					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value,
 					success:function(datos){
 						alert(datos);
 						if(datos=="VALIDA"){

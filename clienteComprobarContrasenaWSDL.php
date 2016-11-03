@@ -4,10 +4,9 @@
 	require_once('nusoap-0.9.5/lib/class.wsdlcache.php');
 	//creamos el objeto de tipo soapclient.
 	//donde se encuentra el servicio SOAP que vamos a utilizar.
-	$soapclient = new nusoap_client( 'http://sw14.hol.es/ServiciosWeb/comprobarContraseña.php?wsdl',true);
+	$soapclient = new nusoap_client( 'http://asiksw.hol.es/comprobarContrasena.php?wsdl',true);
 	//Llamamos la función que habíamos implementado en el Web Service
 	//e imprimimos lo que nos devuelve
-	$str= $_GET['contraseña'];
-	echo $soapclient->call('comprobar', array('x'=>$_GET['contraseña'])); 
+	echo $soapclient->call('comprobarContrasena', array('x'=>$_GET['contrasena'])); 
 }
 ?>

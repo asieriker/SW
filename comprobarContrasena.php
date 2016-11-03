@@ -6,9 +6,9 @@
 	$server = new soap_server;
 	//registramos la función que vamos a implementar
 	//se podría registrar mas de una función ...
-	$server->register('comprobarContraseña');
+	$server->register('comprobarContrasena');
 	//implementamos la función
-	function comprobarContraseña ($mystr){
+	function comprobarContrasena ($mystr){
 	
 		$myfile = fopen("toppasswords.txt", "r") or die("Unable to open file!");
 		// Output one line until end-of-file

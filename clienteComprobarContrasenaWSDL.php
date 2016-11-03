@@ -8,5 +8,4 @@
 	//Llamamos la función que habíamos implementado en el Web Service
 	//e imprimimos lo que nos devuelve
 	echo $soapclient->call('comprobarContrasena', array('x'=>$_GET['contrasena'])); 
-}
 ?>

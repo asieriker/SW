@@ -122,6 +122,28 @@
 			?>
 				
 			</script>
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+		<script>
+		function correoRegAJAX(){
+			alert(document.getElementById('direcciondecorreo').value);
+		$.ajax({
+			url: 'correoRegistrado.php?email='+ document.getElementById('direcciondecorreo').value,
+			success:function(datos){
+				alert(datos);
+				if(datos=="SI"){
+					document.getElementById('correoValido').innerHTML="Registrado";
+					}else{
+					document.getElementById('correoValido').innerHTML="No Registrado";	
+					}
+				},
+			error:function(){
+				$('#correoValido').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
+				}		
+		})
+		}
+	</script>
+	
 		</head>
 	<body>
 	<body>
@@ -143,8 +165,8 @@
 
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos" pattern="[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*" required oninvalid="this.setCustomValidity('Introduce Nombre y dos apellidos')" oninput="setCustomValidity('')"/><br><br>
 
-			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/><br><br>
-
+			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required onchange="correoRegAJAX()" oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/><br><br>
+			<div id="correoValido">hola</div></br>
 			Password*: <input type="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" /><br><br>
 
 			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono" pattern="^[0-9]{9}$" required oninvalid="this.setCustomValidity('Introduce un numero de telefono valido; 9 digitos')" oninput="setCustomValidity('')"/><br><br>

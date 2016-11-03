@@ -142,6 +142,25 @@
 				}		
 		})
 		}
+
+		function contraseñaAJAX(){
+			alert(document.getElementById('password').value);
+		$.ajax({
+			url: 'clienteComprobarContraseñaWSDL.php?contraseña='+ document.getElementById('password').value,
+			success:function(datos){
+				alert(datos);
+				if(datos=="VALIDA"){
+					document.getElementById('contraseñaValida').innerHTML="Registrado";
+					}else{
+					document.getElementById('contraseñaValida').innerHTML="No Registrado";	
+					}
+				},
+			error:function(){
+				$('#contraseñaValida').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
+				}		
+		})
+		}
+
 	</script>
 	
 		</head>

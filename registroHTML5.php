@@ -195,7 +195,7 @@
 
 <?php
 if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])
-{
+){
 //Crear conexiÃ³n
 $mysqli = mysqli_connect("localhost", "root", "", "Quiz");
 if (!$mysqli)

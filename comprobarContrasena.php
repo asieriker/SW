@@ -8,7 +8,7 @@
 	//se podría registrar mas de una función ...
 	$server->register('comprobarContrasena');
 	//implementamos la función
-	function comprobarContrasena($mystr){
+	function comprobarContrasena($x){
 	
 		$myfile = fopen("toppasswords.txt", "r") or die("Unable to open file!");
 		// Output one line until end-of-file

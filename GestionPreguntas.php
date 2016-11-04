@@ -40,7 +40,7 @@
 			error:function(){
 				$('#numPreguntas').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
 				}		
-		})}, 5000);
+		})}, 10000);
 	</script>
 	
 <script language="javascript">

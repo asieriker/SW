@@ -106,43 +106,29 @@
 					document.getElementById('sample').src = $ruta;
 					alert($ruta); //ver que toma el navegador del campo file
 				}
-				<?php
-				function correoRegistrado($correo){
-					//incluimos la clase nusoap.php
-					require_once('nusoap-0.9.5/lib/nusoap.php');
-					require_once('nusoap-0.9.5/lib/class.wsdlcache.php');
-					//creamos el objeto de tipo soapclient.
-					//donde se encuentra el servicio SOAP que vamos a utilizar.
-					$soapclient = new nusoap_client( 'http://sw14.hol.es/ServiciosWeb/comprobarmatricula.php?wsdl',true);
-					//Llamamos la función que habíamos implementado en el Web Service
-					//e imprimimos lo que nos devuelve
-					return $soapclient->call('comprobar', array('x'=>$correo)); 	
-				}
-			?>
-				
 			</script>
 			
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 		<script>
 		function correoRegAJAX(){
-		$.ajax({
-			url: 'correoRegistrado.php?email='+ document.getElementById('direcciondecorreo').value,
-			beforeSend:function(){
-				$('#correoValido').html('<div><img src="imagenes/loading.gif"/></div>')},
-			success:function(datos){
-				if(datos=="SI"){
-					$('#correoValido').html('<div><img src="imagenes/OK.png"/></div>');
-					}else{
-					$('#correoValido').html('<div><img src="imagenes/error.png"/></div>');
-					}
-				},
-			error:function(){
-				$('#correoValido').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
-				}		
-		})
+			$.ajax({
+				url: 'correoRegistrado.php?email='+ document.getElementById('direcciondecorreo').value,
+				beforeSend:function(){
+					$('#correoValido').html('<div><img src="imagenes/loading.gif"/></div>')},
+				success:function(datos){
+					if(datos=="SI"){
+						$('#correoValido').html('<div><img src="imagenes/OK.png"/></div>');
+						}else{
+						$('#correoValido').html('<div><img src="imagenes/error.png"/></div>');
+						}
+					},
+				error:function(){
+					$('#correoValido').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
+					}		
+			})
 		}
 		function contraseñaAJAX(){
-					alert(document.getElementById('password').value);
+				alert(document.getElementById('password').value);
 				$.ajax({
 					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value,
 					success:function(datos){
@@ -157,25 +143,24 @@
 						$('#contraseñaValida').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
 						}        
 				})
-				}
-	</script>
+		}
+		</script>
 	
-		</head>
+	</head>
 	<body>
-	<body>
-	  <div id='page-wrap'>
-		<header class='main' id='h1'>
-			<span class="right"><a href="registro.html">Registrarse</a></span>
-			<span class="right"><a href="Login.php">Login</a></span>
-				<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
-			<h2>Quiz: el juego de las preguntas</h2>
-		</header>
-		<nav class='main' id='n1' role='navigation'>
-			<span><a href="layout.html">Inicio</a></spam>
-			<span><a href='creditos.html'>Creditos</a></spam>
-		</nav>
-		<section class="main" id="s1">
-		<div>
+		<div id='page-wrap'>
+			<header class='main' id='h1'>
+				<span class="right"><a href="registro.html">Registrarse</a></span>
+				<span class="right"><a href="Login.php">Login</a></span>
+					<span class="right" style="display:none;"><a href="/logout">Logout</a></span>
+				<h2>Quiz: el juego de las preguntas</h2>
+			</header>
+			<nav class='main' id='n1' role='navigation'>
+				<span><a href="layout.html">Inicio</a></spam>
+				<span><a href='creditos.html'>Creditos</a></spam>
+			</nav>
+	<section class="main" id="s1">
+	<div>
 	<h1>Registro</h1><br/>
 		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="">
 
@@ -196,21 +181,21 @@
 			Tecnologias y herramientas en las que estas interesado: <input type="textarea" rows="4" cols="50" name="intereses" id="intereses"><br><br>
 		   			<input type="file" id="foto" name="foto" onchange="return ShowImagePreview( this.files );" /><br><br>
 					<div id="previewcanvascontainer"><canvas id="previewcanvas"></canvas></div>
-			<br><input type="submit" value="Enviar"><br><br>
-			
+			<br><input type="submit" value="Enviar"><br><br>	
 		</form>
-		</div>
-		 </section>
-	<footer class='main' id='f1'>
-		<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
-		<a href='https://github.com'>Link GITHUB</a>
-	</footer>
-</div>
+	</div>
+	</section>
+		<footer class='main' id='f1'>
+			<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
+			<a href='https://github.com'>Link GITHUB</a>
+		</footer>
+	</div>
 	</body>
 </html>
 
 <?php
-if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])){
+if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])
+{
 //Crear conexiÃ³n
 $mysqli = mysqli_connect("localhost", "root", "", "Quiz");
 if (!$mysqli)

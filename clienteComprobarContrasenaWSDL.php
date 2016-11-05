@@ -9,8 +9,6 @@
 	
 	//Llamamos la función que habíamos implementado en el Web Service
 	//e imprimimos lo que nos devuelve
-	$str=$_GET['contrasena'];
-	$ticket=$_GET['ticket'];
 
-	echo $result= $soapclient->call("comprobarContrasena", array("x"=>$str,"y"=>$ticket)); 
+	echo $soapclient->call("comprobarContrasena", array("x"=>$_GET['contrasena'],"y"=>$_GET['ticket'])); 
 ?>

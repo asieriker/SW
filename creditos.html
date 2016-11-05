@@ -3,33 +3,30 @@
 	<head>
 		<title>Creditos</title>
 		<link rel='stylesheet' href='estilos/solutionyellow/default.css' />
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 		<script>
-
-	//	function mapaAJAX(){
+		function mapaAJAX(){
+			document.getElementById('mapa').innerHTML="dentro de mapaAJAX";
 			$.ajax({
-				url: 'clienteMapaWSDL.php?',
+				url: 'clienteMapaWSDL.php?ip=' + "31.170.165.198",
 				success:function(datos){
+					alert(datos);
 					document.getElementById('mapa').innerHTML=datos;
-				}	
+				},	
 				error: function(){
 					$('#mapa').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
 				}
 			})
-	//	}
-
+		}
 		</script>
-
-
 	</head>
 	<body>
 		<p> <h1 align=center>Iker Redondo & Asier Tamayo </h1></p> 
 		<p><h3 align=center><i>Especialidad:</i> Ingenieria del software</h3></p>
 		<p><div align="center"> <img src="imagenes/Asiertaiker.jpg" alt="foto" border="4"></div></p>
+		<div id="mapa">Aqui el mapa</div>
+		<button type="button" onclick="mapaAJAX()">Click Me!</button>
 		<hr></hr>
 		<p align="center"><a href="layout.html">Volver</a></p>
-
-		<div id="mapa"></div><br>
 	</body>
 </html>

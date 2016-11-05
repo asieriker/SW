@@ -128,23 +128,26 @@
 			})
 		}
 		function contraseñaAJAX(){
-				alert(document.getElementById('password').value);
-				alert(document.getElementById('ticket').value);
+			//	alert(document.getElementById('password').value);
+			//	alert(document.getElementById('ticket').value);
 
 				$.ajax({
 					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value +"&ticket=" +document.getElementById('ticket').value,
 					success:function(datos){
-						if(datos=="VALIDA"){
+						if(datos=="VALIDA" && document.getElementById('password').value !=""){
 							document.getElementById('contraseñaValida').innerHTML="Contraseña valida";
-							}else{
-							document.getElementById('contraseñaValida').innerHTML="Contraseña no valida";    
-							}
-						},
+						}else if (datos == "USUARIO NO AUTORIZADO") {
+								document.getElementById('contraseñaValida').innerHTML="Usuario no autorizado";    
+						}else{
+								document.getElementById('contraseñaValida').innerHTML="Contraseña no valida";    
+						}
+					},
 					error:function(){
 						$('#contraseñaValida').fadeIn().html('<p class="error"><strong>El servidor parece que no responde</p>');
-						}        
+					}        
 				})
 		}
+	/*	pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" */
 		</script>
 	
 	</head>
@@ -163,16 +166,19 @@
 	<section class="main" id="s1">
 	<div>
 	<h1>Registro</h1><br/>
-		<form form id='registro' name='registro' onSubmit='return verificar()' enctype="multipart/form-data" method="POST" action="">
+		<form form id='registro' name='registro' enctype="multipart/form-data" method="POST" action="registroHTML5.php">
 
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos" pattern="[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*" required oninvalid="this.setCustomValidity('Introduce Nombre y dos apellidos')" oninput="setCustomValidity('')"/><br><br>
 
 			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required onchange="correoRegAJAX()" oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/>
 			<div id="correoValido"></div><br><br> 
 			
-			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" />
 
-			Ticket(4 dígitos): <input type="text" name="ticket" id="ticket" onchange="contraseñaAJAX()" pattern="^[a-zA-Z]+[0-9]{4}$" required oninvalid="ta mal" oninput="setCustomValidity('')"/><br>
+
+
+			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" required />
+
+			Ticket(4 dígitos): <input type="text" name="ticket" id="ticket" onchange="contraseñaAJAX()" pattern="^[0-9]{4}$" required oninvalid="ta mal" oninput="setCustomValidity('')"/>
 
 			<div id="contraseñaValida"></div><br><br> 
 			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono" pattern="^[0-9]{9}$" required oninvalid="this.setCustomValidity('Introduce un numero de telefono valido; 9 digitos')" oninput="setCustomValidity('')"/><br><br>
@@ -198,57 +204,66 @@
 </html>
 
 <?php
-if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])
-){
-//Crear conexiÃ³n
-$mysqli = mysqli_connect("localhost", "root", "", "Quiz");
-if (!$mysqli)
-{
-echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
-}
-
-$rutaEnServidor='./imagenes';
-$rutaTemporal=$_FILES['foto']['tmp_name'];
-$nombreImagen=$_FILES['foto']['name'];
-
-if (empty($nombreImagen)) {
-	$nombreImagen='nodisponible.png';
-}
-
-$rutaDestino=$rutaEnServidor.'/'.$nombreImagen;
-move_uploaded_file($rutaTemporal, $rutaDestino);
-$emailfield='^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$';
-if (!preg_match("/^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$/", $_POST['direcciondecorreo']))
-{
-    echo "Email introducido incorrecto";
-}else if(!preg_match("/[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*/", $_POST['nombreyapellidos']))
-{
-	echo "El nombre y apellidos introducidos son incorrectos";	
-}else if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/", $_POST['password']))
-{
-	echo "La contraseña introducida es incorrecta";	
-}else if(!preg_match("/^[0-9]{9}$/", $_POST['numerodetelefono']))
-{
-	echo "El numero de telfono introducido es incorrecto";	
-	
-}else{
-	$result = correoRegistrado($_POST['direcciondecorreo']); 
-
-	if($result== "SI"){
-
-		$sql="INSERT INTO usuario (NombreApellidos, Correo, Contrasena, NTelefono, Especialidad, Intereses, ruta) VALUES ('$_POST[nombreyapellidos]','$_POST[direcciondecorreo]','$_POST[password]',$_POST[numerodetelefono],'$_POST[especialidad]','$_POST[intereses]', '$rutaDestino')";
-
-		if (!mysqli_query($mysqli ,$sql))
+	if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])
+	){ echo "que paza?";
+		//Crear conexiÃ³n
+		$mysqli = mysqli_connect("localhost", "root", "", "Quiz");
+		if (!$mysqli)
 		{
-			die('Error: ' . mysqli_error($mysqli));
+		echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
 		}
-		echo '<script language="javascript">alert("1  record added");</script>';
-		echo "<p> <a href='verUsuariosConFoto.php'> Ver registros </a>";
+
+		$rutaEnServidor='./imagenes';
+		$rutaTemporal=$_FILES['foto']['tmp_name'];
+		$nombreImagen=$_FILES['foto']['name'];
+
+		if (empty($nombreImagen)) {
+			$nombreImagen='nodisponible.png';
+		}
+
+		$rutaDestino=$rutaEnServidor.'/'.$nombreImagen;
+		move_uploaded_file($rutaTemporal, $rutaDestino);
+		$emailfield='^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$';
+		if (!preg_match("/^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$/", $_POST['direcciondecorreo']))
+		{
+		    echo "Email introducido incorrecto";
+		}else if(!preg_match("/[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*/", $_POST['nombreyapellidos']))
+		{
+			echo "El nombre y apellidos introducidos son incorrectos";	
+		}else if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/", $_POST['password']))
+		{
+				echo '<script language="javascript">alert("La contraseña vive con tu madre en un castillo");</script>';	
+		}else if(!preg_match("/^[0-9]{9}$/", $_POST['numerodetelefono']))
+		{
+			echo "El numero de telfono introducido es incorrecto";	
+			
+		}else{
+
+			//incluimos la clase nusoap.php
+			require_once('nusoap-0.9.5/lib/nusoap.php');
+			require_once('nusoap-0.9.5/lib/class.wsdlcache.php');
+			//creamos el objeto de tipo soapclient.
+			//donde se encuentra el servicio SOAP que vamos a utilizar.
+			$soapclient = new nusoap_client( 'http://sw14.hol.es/ServiciosWeb/comprobarmatricula.php?wsdl',true);
+			//Llamamos la función que habíamos implementado en el Web Service
+			//e imprimimos lo que nos devuelve
+			$result= $soapclient->call('comprobar', array('x'=>$_POST['direcciondecorreo'])); 
 		
-	}else{
-		echo '<script language="javascript">alert("No estás matriculado en la asignatura");</script>';	}
-}
-//Cerrar conexiÃ³n
-mysqli_close($mysqli);
-}
+			if($result== "SI"){
+
+				$sql="INSERT INTO usuario (NombreApellidos, Correo, Contrasena, NTelefono, Especialidad, Intereses, ruta) VALUES ('$_POST[nombreyapellidos]','$_POST[direcciondecorreo]','$_POST[password]',$_POST[numerodetelefono],'$_POST[especialidad]','$_POST[intereses]', '$rutaDestino')";
+
+				if (!mysqli_query($mysqli ,$sql))
+				{
+					die('Error: ' . mysqli_error($mysqli));
+				}
+				echo '<script language="javascript">alert("1  record added");</script>';
+				echo "<p> <a href='verUsuariosConFoto.php'> Ver registros </a>";
+				
+			}else{
+				echo '<script language="javascript">alert("No estás matriculado en la asignatura");</script>';	}
+		}
+		//Cerrar conexiÃ³n
+		mysqli_close($mysqli);
+	}
 ?>

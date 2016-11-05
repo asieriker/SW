@@ -29,7 +29,7 @@
 			return "VALIDA";
 
 		}else{
-			return "INVALIDA";
+			return "USUARIO NO AUTORIZADO";
 		}
 	}
 	//llamamos al método service de la clase nusoap

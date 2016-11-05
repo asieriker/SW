@@ -132,11 +132,10 @@
 				$.ajax({
 					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value,
 					success:function(datos){
-						alert(datos);
 						if(datos=="VALIDA"){
-							document.getElementById('contraseñaValida').innerHTML="Registrado";
+							document.getElementById('contraseñaValida').innerHTML="Contraseña valida";
 							}else{
-							document.getElementById('contraseñaValida').innerHTML="No Registrado";    
+							document.getElementById('contraseñaValida').innerHTML="Contraseña no valida";    
 							}
 						},
 					error:function(){

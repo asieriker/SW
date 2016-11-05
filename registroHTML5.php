@@ -129,8 +129,10 @@
 		}
 		function contraseñaAJAX(){
 				alert(document.getElementById('password').value);
+				alert(document.getElementById('ticket').value);
+
 				$.ajax({
-					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value,
+					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value +"&ticket=" +document.getElementById('ticket').value,
 					success:function(datos){
 						if(datos=="VALIDA"){
 							document.getElementById('contraseñaValida').innerHTML="Contraseña valida";
@@ -168,7 +170,10 @@
 			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required onchange="correoRegAJAX()" oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/>
 			<div id="correoValido"></div><br><br> 
 			
-			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" /><br><br>
+			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')" />
+
+			Ticket(4 dígitos): <input type="text" name="ticket" id="ticket" onchange="contraseñaAJAX()" pattern="^[a-zA-Z]+[0-9]{4}$" required oninvalid="ta mal" oninput="setCustomValidity('')"/><br>
+
 			<div id="contraseñaValida"></div><br><br> 
 			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono" pattern="^[0-9]{9}$" required oninvalid="this.setCustomValidity('Introduce un numero de telefono valido; 9 digitos')" oninput="setCustomValidity('')"/><br><br>
 			

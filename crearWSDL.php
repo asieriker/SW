@@ -9,22 +9,28 @@
 	$server->wsdl->schemaTargetNamespace=$ns;
 	//registramos la función que vamos a implementar
 	$server->register("comprobarContrasena",
-	array("x"=>"xsd:string"),
+	array("x"=>"xsd:string","y"=>"xsd:string"),
 	array("z"=>'xsd:string'),
 	$ns);
 	//implementamos la función
-	function comprobarContrasena($x){
+	function comprobarContrasena($x,$y){
 		
-		$fp = fopen("toppasswords.txt", "r") or die("No se ha podido abrir el archivo");
-		while(!feof($fp)) {
-			$linea = fgets($fp);
-			$linea = trim($linea);
-			if (($var1 = strcmp($linea, $x)) == 0){
-				return "INVALIDA";
+		if (($var2 = strcmp($y, "0000")) == 0){
+
+			$fp = fopen("toppasswords.txt", "r") or die("No se ha podido abrir el archivo");
+			while(!feof($fp)) {
+				$linea = fgets($fp);
+				$linea = trim($linea);
+				if (($var1 = strcmp($linea, $x)) == 0){
+					return "INVALIDA";
+				}
 			}
+			fclose($fp);
+			return "VALIDA";
+
+		}else{
+			return "INVALIDA";
 		}
-		fclose($fp);
-		return "VALIDA";
 	}
 	//llamamos al método service de la clase nusoap
 	//$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';

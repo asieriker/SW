@@ -133,6 +133,8 @@
 
 				$.ajax({
 					url: 'clienteComprobarContrasenaWSDL.php?contrasena='+ document.getElementById('password').value +"&ticket=" +document.getElementById('ticket').value,
+					beforeSend:function(){
+					$('#contraseñaValida').html('<div><img src="imagenes/loading.gif"/></div>')},
 					success:function(datos){
 						if(datos=="VALIDA" && document.getElementById('password').value !=""){
 							document.getElementById('contraseñaValida').innerHTML="Contraseña valida";
@@ -170,16 +172,13 @@
 
 			Nombre y apellidos*: <input type="text" name="nombreyapellidos" id="nombreyapellidos" pattern="[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*" required oninvalid="this.setCustomValidity('Introduce Nombre y dos apellidos')" oninput="setCustomValidity('')"/><br><br>
 
-			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required onchange="correoRegAJAX()" oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/>
+			Direccion de correo*: <input type="text" name="direcciondecorreo" id="direcciondecorreo" pattern="^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$" required onchange="correoRegAJAX()" oninvalid="this.setCustomValidity('Introduce un email valido.\n Ejemplo: jvadillo001@ikasle.ehu.eus')" oninput="setCustomValidity('')"/><br>
 			<div id="correoValido"></div><br><br> 
 			
-
-
-
-			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" required />
+			Password*: <input type="password" name="password" id="password" onchange="contraseñaAJAX()" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" required oninvalid="this.setCustomValidity('La clave introducida no cumple los requisitos: \n \n Minimo 8 caracteres \n Maximo 15 \n Al menos una letra mayúscula \n Al menos una letra minuscula \n Al menos un dígito No espacios en blanco \n Al menos 1 caracter especial')" oninput="setCustomValidity('')"/>
 
 			Ticket(4 dígitos): <input type="text" name="ticket" id="ticket" onchange="contraseñaAJAX()" pattern="^[0-9]{4}$" required oninvalid="ta mal" oninput="setCustomValidity('')"/>
-
+			<br>
 			<div id="contraseñaValida"></div><br><br> 
 			Numero de telefono*: <input type="text" name="numerodetelefono" id="numerodetelefono" pattern="^[0-9]{9}$" required oninvalid="this.setCustomValidity('Introduce un numero de telefono valido; 9 digitos')" oninput="setCustomValidity('')"/><br><br>
 			
@@ -193,19 +192,10 @@
 					<div id="previewcanvascontainer"><canvas id="previewcanvas"></canvas></div>
 			<br><input type="submit" value="Enviar"><br><br>	
 		</form>
-	</div>
-	</section>
-		<footer class='main' id='f1'>
-			<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
-			<a href='https://github.com'>Link GITHUB</a>
-		</footer>
-	</div>
-	</body>
-</html>
-
-<?php
+		
+		<?php
 	if(isset($_POST['nombreyapellidos'])&&isset($_POST['direcciondecorreo'])&&isset($_POST['password'])&&isset($_POST['numerodetelefono'])
-	){ echo "que paza?";
+	){ 
 		//Crear conexiÃ³n
 		$mysqli = mysqli_connect("localhost", "root", "", "Quiz");
 		if (!$mysqli)
@@ -226,30 +216,27 @@
 		$emailfield='^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$';
 		if (!preg_match("/^[a-zA-Z]+[0-9]{3}@ikasle.ehu.(es|eus)$/", $_POST['direcciondecorreo']))
 		{
-		    echo "Email introducido incorrecto";
+			echo '<script language="javascript">alert("Email introducido incorrecto");</script>';	
 		}else if(!preg_match("/[A-Z]+[a-z]* [A-Z]+[a-z]* [A-Z]+[a-z]*/", $_POST['nombreyapellidos']))
 		{
-			echo "El nombre y apellidos introducidos son incorrectos";	
+			echo '<script language="javascript">alert("El nombre y apellidos introducidos son incorrectos");</script>';	
 		}else if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/", $_POST['password']))
 		{
-				echo '<script language="javascript">alert("La contraseña vive con tu madre en un castillo");</script>';	
+			echo '<script language="javascript">alert("La contraseña es incorrecta");</script>';	
 		}else if(!preg_match("/^[0-9]{9}$/", $_POST['numerodetelefono']))
 		{
-			echo "El numero de telfono introducido es incorrecto";	
-			
+			echo '<script language="javascript">alert("El numero de telfono introducido es incorrecto");</script>';				
 		}else{
-
-			//incluimos la clase nusoap.php
 			require_once('nusoap-0.9.5/lib/nusoap.php');
 			require_once('nusoap-0.9.5/lib/class.wsdlcache.php');
-			//creamos el objeto de tipo soapclient.
-			//donde se encuentra el servicio SOAP que vamos a utilizar.
 			$soapclient = new nusoap_client( 'http://sw14.hol.es/ServiciosWeb/comprobarmatricula.php?wsdl',true);
-			//Llamamos la función que habíamos implementado en el Web Service
-			//e imprimimos lo que nos devuelve
-			$result= $soapclient->call('comprobar', array('x'=>$_POST['direcciondecorreo'])); 
+			$resultadoEmail= $soapclient->call('comprobar', array('x'=>$_POST['direcciondecorreo'])); 
 		
-			if($result== "SI"){
+			require_once("nusoap-0.9.5/lib/nusoap.php");
+			require_once("nusoap-0.9.5/lib/class.wsdlcache.php");
+			$soapclient = new nusoap_client( "http://localhost/SW/crearWSDL.php?wsdl",true);
+			$resultadoContrasena = $soapclient->call("comprobarContrasena", array("x"=>$_POST['password'],"y"=>$_POST['ticket'])); 
+			if($resultadoContrasena=="VALIDA" && $resultadoEmail== "SI"){
 
 				$sql="INSERT INTO usuario (NombreApellidos, Correo, Contrasena, NTelefono, Especialidad, Intereses, ruta) VALUES ('$_POST[nombreyapellidos]','$_POST[direcciondecorreo]','$_POST[password]',$_POST[numerodetelefono],'$_POST[especialidad]','$_POST[intereses]', '$rutaDestino')";
 
@@ -257,13 +244,26 @@
 				{
 					die('Error: ' . mysqli_error($mysqli));
 				}
-				echo '<script language="javascript">alert("1  record added");</script>';
+				echo '<script language="javascript">alert("Registrado correctamente");</script>';
 				echo "<p> <a href='verUsuariosConFoto.php'> Ver registros </a>";
 				
+			}else if($resultadoEmail== "NO"){
+				echo '<script language="javascript">alert("No estás matriculado en la asignatura");</script>';	
 			}else{
-				echo '<script language="javascript">alert("No estás matriculado en la asignatura");</script>';	}
+				echo '<script language="javascript">alert("Contraseña invalida");</script>';	
+			}
 		}
 		//Cerrar conexiÃ³n
 		mysqli_close($mysqli);
 	}
 ?>
+	</div>
+	</section>
+		<footer class='main' id='f1'>
+			<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>
+			<a href='https://github.com'>Link GITHUB</a>
+		</footer>
+	</div>
+	</body>
+</html>
+

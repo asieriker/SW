@@ -15,5 +15,5 @@ echo '<tr><td>' . $row['NombreApellidos'] . '</td> <td>' . $row['Correo'] . '</t
 echo '</table>';
 $usuarios->close(); //poner notacion no OO
 mysqli_close($link);
-
+echo "<p> <a href='layout.html'> Volver a inicio </a>";
 ?>
